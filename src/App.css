@@ -1,0 +1,13 @@
+/* Header Styles */
+header {
+  background-color: #fff; /* You can change the background color as needed */
+
+  display: flex;
+  justify-content: space-between;
+  
+  width: auto;
+  margin: 0 auto;
+}
+
+
+
