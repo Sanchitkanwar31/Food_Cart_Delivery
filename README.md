@@ -1,8 +1,7 @@
+# Food_Cart_Delivery
+Food Cart Delivery is a MERN-based platform for seamless food ordering and delivery. Built with React.js, Node.js, Express.js, and MongoDB, it ensures a smooth user experience, secure authentication, real-time order tracking, and online payment.
+
+---
+
 # React + Vite
-
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
