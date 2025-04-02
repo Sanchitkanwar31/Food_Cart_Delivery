@@ -112,6 +112,8 @@ app.use(express.json());
 app.use('/api', require("./routes/CreateUser"));
 app.use('/api', require("./routes/DisplayData"));
 app.use('/api', require("./routes/OrderData"));
+app.use('/api', require("./routes/foodRoutes")); 
+// Add food routes
 
 // ✅ Root route (for testing server status)
 app.get('/', (req, res) => {
