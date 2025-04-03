@@ -26,7 +26,7 @@ router.post("/add",async (req,res) => {
             type
         });
 
-        console.log("Generated UUID (_id):", newFoodItem._id);
+        //console.log("Generated UUID (_id):", newFoodItem._id);
         await newFoodItem.save();
 
         res.status(201).json({
