@@ -8,6 +8,7 @@ import Login from './screens/Login'
 import Signup from './screens/Signup'
 import { CartProvider } from './components/ContextReducer'
 import Cart from './screens/Cart'
+import Category from './components/Category'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +26,9 @@ function App() {
             <Route path="/signup" element={<Signup />} />
 
             <Route path="/cart" element={<Cart />} />
+
+            <Route path="/category" element={<Category />} />
+
             
             {/* Uncomment and define additional routes here */}
             {/* <Route path="/product-detail/:id" element={<ProductDetails />} />
