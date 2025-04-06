@@ -1,52 +1,3 @@
-// const express = require("express");
-
-// const router = express.Router();
-
-// const User = require("../models/User");//import format for User.js
-
-// const { check, validationResult } = require("express-validator"); // Import Express Validator
-
-
-// //format=.post(path, middleware, callback)
-// router.post("/createuser", [
-//     check('name').isString().withMessage("It is not string value"),
-//     check("password").isLength({min: 6}).withMessage("Length of password"),
-//     check("email").isEmail().withMessage("Invalid email"),
-
-// ],
-// async (req, res) => { 
-//     const errors = validationResult(req);
-//     if(!errors.isEmpty()) {
-//         return res.json({success:false});
-//     }
-
-//     try {
-//         // await User.create({
-//         //     name: "Rohit",
-//         //     password: "12345",
-//         //     email: "sak@gm.com",
-//         //     location: "noida",
-
-//         // })
-
-//         //BELOW this will use TCBody to send data from user as json + name,password be same as the body of(thinder client(TC))
-//         await User.create({
-//             name: req.name,
-//             email: req.email,
-//             password: req.password,
-//             location: req.body.location,
-
-//         })
-//         res.json({success:true});
-//     }
-//     catch(err) {
-//         console.log(err);
-//         res.json({success:false});
-//     }
-// })
-
-// module.exports = router;
-
 
 const express = require("express");
 const router = express.Router();
@@ -74,20 +25,22 @@ router.post(
       return res.status(400).json({ success: false, errors: errors.array() });
     }
 
+    //encrypt the password using bcrypt
     const salt = await bcrypt.genSalt(10);
     let secpaswd = await bcrypt.hash(req.body.password,salt)
 
 
     try {
-      // Ensure you are accessing the correct properties from `req.body`
-      const { name, email, password, location } = req.body;
+      //  accessing the correct properties from `req.body`
+      const { name, email, password, location, role } = req.body;
 
       // Create a new user with the provided data
       await User.create({
-        name: name, // Correctly reference `req.body.name`
+        name: name, 
         email: email,
         password: secpaswd,
         location: location,
+        role: role || "user", 
       });
 
       res.json({ success: true });
@@ -125,7 +78,7 @@ router.post("/loginuser", async (req, res) => {
     const authtoken = jwt.sign(data, jwtsecret);
     console.log("Generated Auth Token:", authtoken);
 
-    res.json({ success: true, message: "Login successful", authtoken });
+    res.json({ success: true, message: "Login successful", authtoken,  role: userdata.role, });
   } catch (err) {
     console.error("Server error:", err);
     res.status(500).json({ success: false, error: "Server error" });

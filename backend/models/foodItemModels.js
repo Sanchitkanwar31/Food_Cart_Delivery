@@ -7,7 +7,7 @@ const FoodItemSchema = new mongoose.Schema({
     options: [
         {
             half: { type: Number }, 
-            full: { type: Number, required: true } 
+            full: { type: Number, required: true }
         }
     ],
     description: { type: String, required: true },

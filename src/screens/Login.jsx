@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link ,useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -17,12 +17,6 @@ export default function Login() {
         }),
       });
 
-      // if (!response.ok) {
-      //   throw new Error(`HTTP error! status: ${response.status}`);
-      // } it will cause the error as  it parses the response JSON and checks for json.success or other error messages from the backend. Instead, it goes directly to the catch block.
-      // rto use response we should add the json to be parsed inside thiss condtnm
-
-
       const json = await response.json();
       console.log(json);
 
@@ -30,22 +24,24 @@ export default function Login() {
         alert("Invalid credentials. Please try again.");
       } else {
         alert("Login successful. Redirecting...");
-        //new email added on 7/2/25 below
-        localStorage.setItem("userEmail", credentials.email);
 
-        localStorage.setItem("authtoken", json.data);
+        // Save token and email
+        localStorage.setItem("userEmail", credentials.email);
+        localStorage.setItem("authtoken", json.authtoken); // ✅ corrected key
         console.log(localStorage.getItem("authtoken"));
-        // Add navigation logic here, e.g., redirect to a dashboard
-        navigate("/");
+
+        // Navigate based on role
+        if (json.role === "admin") {
+          navigate("/admin"); // ✅ redirect to admin
+        } else {
+          navigate("/"); // ✅ redirect to user homepage
+        }
       }
-    } 
-    
-    catch (err) {
+    } catch (err) {
       console.error("Error during login:", err);
       alert("Something went wrong. Please try again later.");
     }
   };
-  
 
   const onChange = (event) => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value });
