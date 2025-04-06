@@ -4,8 +4,8 @@ import { useDispatchCart, useCart } from "./ContextReducer";  // Ensure correct 
 
 export default function Card(props) {
   const { foodIt, options } = props;
-  // const priceOptions = Object.keys(options);
-  const priceOptions = Object.keys(options).filter((key) => key !== "_id");
+  const priceOptions = Object.keys(options);
+  //const priceOptions = Object.keys(options).filter((key) => key !== "_id");
 
   const dispatch = useDispatchCart();
   const data = useCart();
