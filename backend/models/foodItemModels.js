@@ -11,7 +11,7 @@ const FoodItemSchema = new mongoose.Schema({
         }
     ],
     description: { type: String, required: true },
-    type: { type: String, enum: ["Veg", "Non-Veg"], required: true }
+    type: { type: String, enum: ["Veg", "Non-Veg", "veg", "non-veg"], required: true }
 }, { collection: "food_category"}); // Explicit collection 
 
 // export model to mongo to collection name

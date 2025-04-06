@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     CategoryName: '',
     name: '',
@@ -39,6 +41,7 @@ function App() {
 
       if (response.ok) {
         console.log('Food Item item added successfully:', data);
+        navigate('/'); 
       } else {
         console.error('Error adding Foo item:', data.error);
       }

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 function Category() {
+  const navigate = useNavigate();
   const [product, setProduct] = useState({
+
     name: '',
     price: '',
     category: '',
@@ -30,6 +32,7 @@ function Category() {
 
       if (response.ok) {
         console.log('Foo item added successfully:', data);
+        navigate('/'); 
       } else {
         console.error('Error adding Foo item:', data.error);
       }
