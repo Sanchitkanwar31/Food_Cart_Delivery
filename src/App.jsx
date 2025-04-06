@@ -9,6 +9,7 @@ import Signup from './screens/Signup'
 import { CartProvider } from './components/ContextReducer'
 import Cart from './screens/Cart'
 import Category from './components/Category'
+import Food from './components/Food'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -28,6 +29,8 @@ function App() {
             <Route path="/cart" element={<Cart />} />
 
             <Route path="/category" element={<Category />} />
+
+            <Route path="/createfood" element={<Food />} />
 
             
             {/* Uncomment and define additional routes here */}

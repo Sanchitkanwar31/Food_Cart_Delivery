@@ -86,6 +86,10 @@ function Navbar() {
               <Link className="nav-link active fs-50 fst-italic" to="/category">
                   Create Category
                 </Link>
+
+              <Link className="nav-link active fs-50 fst-italic" to="/createfood">
+                  Create Food
+                </Link>
             </ul>
 
             {/* Conditional rendering based on authentication */}
