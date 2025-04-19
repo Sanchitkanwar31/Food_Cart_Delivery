@@ -3,6 +3,7 @@ import Navbar from "../components/navbar";
 import Footer from "../components/Footer";
 import Card from "../components/Card";
 import Carousel from "../components/Carousel";
+import { MdDelete } from "react-icons/md";
 
 export default function Home() {
   const [categories, setCategories] = useState([]);
@@ -21,6 +22,16 @@ export default function Home() {
     setCategories(response[0]); // Categories
     setFoodItems(response[1]); // Food items
   };
+
+  const deleteCat = async (id) => {
+    let response = await fetch(`http://localhost:3000/api/deleteCategory?id=${id}`, {
+      method: "DELETE",
+    });
+  
+    response = await response.json();
+    console.log(response);
+  };
+  
 
   useEffect(() => {
     loadData();
@@ -87,7 +98,13 @@ export default function Home() {
 
           return (
             <div key={category._id} className="category-section mb-5">
-              <h2 className="fs-2 m-3">{category.name}</h2>
+            <h2 className="fs-2 m-3">
+              {category.name}
+              <div className="tw-ml-72" onClick={() => deleteCat(category._id)}>
+                <MdDelete />
+              </div>
+            </h2>
+
               {itemsInCategory.length > 0 ? (
                 <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
                   {itemsInCategory.map((food) => (

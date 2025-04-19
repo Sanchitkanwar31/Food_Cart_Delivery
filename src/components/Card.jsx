@@ -1,6 +1,10 @@
 // ___________________________________________________________
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatchCart, useCart } from "./ContextReducer";  // Ensure correct import
+import { MdDelete } from "react-icons/md";
+import { LiaEditSolid } from "react-icons/lia";
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Card(props) {
   const { foodIt, options } = props;
@@ -12,6 +16,9 @@ export default function Card(props) {
   const priceref = useRef();
   const [qty, setQty] = useState(1);
   const [size, setSize] = useState(priceOptions[0] || "");
+
+  const navigate = useNavigate();
+
 
   const handleAddToCart = async () => {
     const selectedPrice = options[size]; // Price for selected size
@@ -39,6 +46,19 @@ export default function Card(props) {
 
   // Calculate the final price based on selected size and quantity
   const finalPrice = qty * parseInt(options[size]);
+  
+  const deleteFood = async () => {
+    let response = await fetch(`http://localhost:3000/api/deleteFood?id=${foodIt._id}`, {
+      method: "DELETE",
+    });
+  
+    response = await response.json();
+    console.log(response);
+  };
+
+  const handleClick = () => {
+    navigate("/editFood", { replace: true, state: { foodIt } });
+  };
 
   useEffect(() => {
     setSize(priceref.current.value);
@@ -47,12 +67,19 @@ export default function Card(props) {
   return (
     <div  className="card mt-2"
            style={{ width: "20rem", maxHeight: "400px" }}>
+    <div className="d-flex align-items-center justify-content-between">
+    <button onClick={handleClick}>
+      <LiaEditSolid className="mr-2" />
+    </button>
+      <MdDelete className="cursor-pointer" onClick={deleteFood} />
+    </div>
       <img
         src={foodIt.img}
         className="card-img-top"
         alt={foodIt.name}
         style={{ height: "150px", objectFit: "cover" }}
       />
+
       <div className="card-body">
         <h5 className="card-title">{foodIt.name}</h5>
         <p className="card-text">{foodIt.description}</p>

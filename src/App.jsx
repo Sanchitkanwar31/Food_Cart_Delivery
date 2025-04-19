@@ -10,6 +10,7 @@ import { CartProvider } from './components/ContextReducer'
 import Cart from './screens/Cart'
 import Category from './components/Category'
 import Food from './components/Food'
+import Edit from './components/Edit'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,6 +32,11 @@ function App() {
             <Route path="/category" element={<Category />} />
 
             <Route path="/createfood" element={<Food />} />
+
+
+            <Route path="/editFood" element={<Edit />} />
+
+
 
             
             {/* Uncomment and define additional routes here */}
